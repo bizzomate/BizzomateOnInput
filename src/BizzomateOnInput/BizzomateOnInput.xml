@@ -19,10 +19,25 @@
             <category>Settings</category>
             <description>You can set a delay so the onInput mf is triggered only when the user is done typing</description>
         </property>
-        <property key="onInputMF" type="microflow">
-            <caption>On change microflow</caption>
+        <property key="onInputActionType" type="enumeration" defaultValue="onInputMicroflow">
+            <caption>Type of action</caption>
+            <category>Settings</category>
+            <description></description>
+            <enumerationValues>
+                <enumerationValue key="onInputMicroflow">Microflow</enumerationValue>
+                <enumerationValue key="onInputNanoflow">Nanoflow</enumerationValue>
+            </enumerationValues>
+        </property>
+        <property key="onInputMicroFlow" type="microflow" required="false"> 
+            <caption>On input microflow</caption>
             <category>Settings</category>
             <description>The microflow to trigger when the input changes</description>
+            <returnType type="Void"/>
+        </property>
+        <property key="onInputNanoflow" type="nanoflow" required="false">
+            <caption>On input nanoflow</caption>
+            <category>Settings</category>
+            <description>The nanoflow to trigger when the input changes</description>
             <returnType type="Void"/>
         </property>
         <property key="onInputPlaceholder" type="translatableString" required="false">

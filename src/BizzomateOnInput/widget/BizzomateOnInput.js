@@ -30,7 +30,9 @@ define([
         // Parameters configured in the Modeler.
         onInputAttribute: "",
         onInputDelay: "",
-        onInputMF: "",
+        onInputActionType: "",
+        onInputMicroFlow: "",
+        onInputNanoflow: "",
         onInputPlaceholder: "",
 
         constructor: function () {
@@ -47,6 +49,18 @@ define([
                 dojoProp.set(this.onInputNode, "placeholder", this.onInputPlaceholder);
             }
             this.connect(this.onInputNode, "oninput", dojoLang.hitch(this, this._onInput));
+
+            if (this.onInputActionType == "onInputMicroflow" && !this.onInputMicroFlow){
+                mx.ui.error(
+                    this.id + " has no 'On input microflow' defined and can't function."
+                );
+            }
+
+            if (this.onInputActionType == "onInputNanoflow" && !this.onInputNanoflow.nanoflow){
+                mx.ui.error(
+                    this.id + " has no 'On input microflow' defined and can't function."
+                );
+            }
         },
 
         update: function (obj, callback) {
@@ -72,7 +86,7 @@ define([
 
             this._contextObj.set(this.onInputAttribute, this.onInputNode.value);
             clearTimeout(this._onInputTimeOut);
-            this._onInputTimeOut = setTimeout(() => { this._execMf(this.onInputMF, this._contextObj.getGuid()) }, this.onInputDelay);
+            this._onInputTimeOut = setTimeout(() => { this._excuteOnInput() }, this.onInputDelay);
         },
 
         _updateRendering: function (callback) {
@@ -124,6 +138,40 @@ define([
             });
             dojoConstruct.place(this._alertDiv, this.onInputDiv);
             dojoClass.add(this.domNode, "has-error");
+        },
+
+        //The action to execute
+        _excuteOnInput: function() {
+            logger.debug(this.id + "._excuteOnInput");
+
+            if (this.onInputActionType && this.onInputActionType == "onInputNanoflow" && this.onInputNanoflow.nanoflow && this._contextObj){
+                mx.data.callNanoflow({
+                    nanoflow: this.onInputNanoflow,
+                    context: this.mxcontext,
+                    origin: this.mxform,
+                    error: function(error) {
+                        mx.ui.error(
+                            "An error occurred: " +
+                                error.message
+                        );
+                    }
+                  });
+            } else if (this.onInputMicroFlow && this._contextObj) {
+                mx.data.action({
+                    params: {
+                        applyto: "selection",
+                        actionname: this.onInputMicroFlow,
+                        guids: [ this._contextObj.getGuid()]
+                    },
+                    origin: this.mxform,
+                    error: function(error) {
+                        mx.ui.error(
+                            "An error occurred: " +
+                                error.message
+                        );
+                    }
+                });
+            } 
         },
 
         // Shorthand for running a microflow
