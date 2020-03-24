@@ -40,6 +40,11 @@
             <description>The nanoflow to trigger when the input changes</description>
             <returnType type="Void"/>
         </property>
+		<property key="executeOnFocus" type="boolean" required="true" defaultValue="true">
+            <caption>Execute micro/nanoflow on focus</caption>
+            <category>Settings</category>
+            <description>Determines whether the micro/nanoflow should be executed when a user enters the inputfield</description>
+        </property>
         <property key="onInputPlaceholder" type="translatableString" required="false">
             <caption>Placeholder</caption>
             <category>Settings</category>
