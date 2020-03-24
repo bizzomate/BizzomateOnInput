@@ -49,6 +49,9 @@ define([
                 dojoProp.set(this.onInputNode, "placeholder", this.onInputPlaceholder);
             }
             this.connect(this.onInputNode, "oninput", dojoLang.hitch(this, this._onInput));
+			if (this.executeOnFocus) {
+				this.connect(this.onInputNode, "onfocus", dojoLang.hitch(this, this._onInput));
+			}
 
             if (this.onInputActionType == "onInputMicroflow" && !this.onInputMicroFlow){
                 mx.ui.error(
