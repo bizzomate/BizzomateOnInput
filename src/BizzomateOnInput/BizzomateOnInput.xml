@@ -19,7 +19,7 @@
             <category>Settings</category>
             <description>You can set a delay so the onInput mf is triggered only when the user is done typing</description>
         </property>
-	<property key="executeOnFocus" type="boolean" required="true" defaultValue="false">
+	    <property key="executeOnFocus" type="boolean" required="true" defaultValue="false">
             <caption>Trigger directly on focus</caption>
             <category>Settings</category>
             <description>Determines whether the micro/nanoflow should be executed when a user enters the inputfield</description>
