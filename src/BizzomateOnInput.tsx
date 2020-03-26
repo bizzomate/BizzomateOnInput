@@ -1,0 +1,45 @@
+import { Component, ReactNode, Fragment, createElement } from "react";
+import { Alert } from "./components/Alert";
+import { hot } from "react-hot-loader/root";
+
+import { BizzomateOnInputContainerProps } from "../typings/BizzomateOnInputProps";
+import { TextInput } from "./components/TextInput";
+
+import "./ui/BizzomateOnInput.css";
+
+class BizzomateOnInput extends Component<BizzomateOnInputContainerProps> {
+    private readonly onUpdateHandle = this.onUpdate.bind(this);
+    private readonly callActionHandle = this.callAction.bind(this);
+    private callActionTimeOut!: number;
+    componentWillUnmount() {
+        clearTimeout(this.callActionTimeOut);
+    }
+    render(): ReactNode {
+        const value = this.props.onInputAttribute.value || "";
+        const validationFeedback = this.props.onInputAttribute.validation;
+        return <Fragment>
+            <TextInput
+                value={value}
+                style={this.props.style}
+                className={this.props.class}
+                tabIndex={this.props.tabIndex}
+                onUpdate={this.onUpdateHandle}
+                disabled={this.props.onInputAttribute.readOnly}
+                hasError={!!validationFeedback}
+            />
+            <Alert>{validationFeedback}</Alert>
+        </Fragment>;
+    }
+    private onUpdate(value: string): void {
+        this.props.onInputAttribute.setValue(value);
+        clearTimeout(this.callActionTimeOut);
+        this.callActionTimeOut = setTimeout(this.callActionHandle, this.props.onInputDelay);
+    }
+    private callAction(): void {
+        if (this.props.onInputAction?.canExecute && !this.props.onInputAction.isExecuting) {
+            this.props.onInputAction.execute();
+        }
+    }
+}
+
+export default hot(BizzomateOnInput);
