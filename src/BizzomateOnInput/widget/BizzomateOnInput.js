@@ -34,6 +34,7 @@ define([
         onInputMicroFlow: "",
         onInputNanoflow: "",
         onInputPlaceholder: "",
+	    executeOnFocus: "",
 
         constructor: function () {
             // Uncomment the following line to enable debug messages
@@ -49,6 +50,9 @@ define([
                 dojoProp.set(this.onInputNode, "placeholder", this.onInputPlaceholder);
             }
             this.connect(this.onInputNode, "oninput", dojoLang.hitch(this, this._onInput));
+	        if (this.executeOnFocus) {
+	            this.connect(this.onInputNode, "onfocus", dojoLang.hitch(this, this._onFocus));
+	        }
 
             if (this.onInputActionType == "onInputMicroflow" && !this.onInputMicroFlow){
                 mx.ui.error(
@@ -81,12 +85,20 @@ define([
             logger.debug(this.id + ".uninitialize");
         },
 
-        _onInput: function (e) {
-            logger.debug(this.id + "._onKeyDown");
+        _onInput: function () {
+            logger.debug(this.id + "._onInput");
 
             this._contextObj.set(this.onInputAttribute, this.onInputNode.value);
             clearTimeout(this._onInputTimeOut);
             this._onInputTimeOut = setTimeout(() => { this._excuteOnInput() }, this.onInputDelay);
+        },
+
+        _onFocus: function() {
+            logger.debug(this.id + "._onFocus");
+
+            this._contextObj.set(this.onInputAttribute, this.onInputNode.value);
+            clearTimeout(this._onInputTimeOut);
+            this._excuteOnInput();
         },
 
         _updateRendering: function (callback) {
