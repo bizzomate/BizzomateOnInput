@@ -21,7 +21,11 @@ export class TextInput extends Component<InputProps> {
         const className = classNames("form-control", this.props.className);
         //const describedBy = `${this.props.id}-label` + (this.props.hasError ? ` ${this.props.id}-error` : "");
         if (this.props.disabled == "text") {
-            return <div className="form-control-static">{this.props.value}</div>
+            if (this.props.value) {
+                return <div className="form-control-static">{this.props.value}</div>;
+            } else {
+                return <div className="form-control-static">&nbsp;</div>
+            }
         } else {
             return <input
                 id={this.props.id}
