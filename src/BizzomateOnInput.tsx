@@ -16,17 +16,22 @@ class BizzomateOnInput extends Component<BizzomateOnInputContainerProps> {
     }
     render(): ReactNode {
         const value = this.props.onInputAttribute.value || "";
+        const placeholder = this.props.onInputPlaceholder?.value || "";
+        const onFocusHandler = this.props.onInputFocus ? this.callActionHandle : undefined;
         const validationFeedback = this.props.onInputAttribute.validation;
+        const disabled = !this.props.onInputAttribute.readOnly ? "no" : this.props.onInputReadOnly == "text" ? "text" : "control";
         return <Fragment>
-            <TextInput
-                value={value}
-                style={this.props.style}
-                className={this.props.class}
-                tabIndex={this.props.tabIndex}
-                onUpdate={this.onUpdateHandle}
-                disabled={this.props.onInputAttribute.readOnly}
-                hasError={!!validationFeedback}
-            />
+                <TextInput
+                    value={value}
+                    style={this.props.style}
+                    placeholder={placeholder}
+                    className={this.props.class}
+                    tabIndex={this.props.tabIndex}
+                    onUpdate={this.onUpdateHandle}
+                    onFocus={onFocusHandler}
+                    disabled={disabled}
+                    hasError={!!validationFeedback}
+                />
             <Alert>{validationFeedback}</Alert>
         </Fragment>;
     }
@@ -36,7 +41,7 @@ class BizzomateOnInput extends Component<BizzomateOnInputContainerProps> {
         this.callActionTimeOut = setTimeout(this.callActionHandle, this.props.onInputDelay);
     }
     private callAction(): void {
-        if (this.props.onInputAction?.canExecute && !this.props.onInputAction.isExecuting) {
+        if (!this.props.onInputAttribute.readOnly && this.props.onInputAction?.canExecute && !this.props.onInputAction.isExecuting) {
             this.props.onInputAction.execute();
         }
     }

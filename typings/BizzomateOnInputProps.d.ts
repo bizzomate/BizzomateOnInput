@@ -14,9 +14,12 @@ interface CommonProps {
     tabIndex: number;
 }
 
+export type OnInputReadOnlyEnum = "control" | "text";
+
 export interface BizzomateOnInputContainerProps extends CommonProps {
     onInputPlaceholder?: DynamicValue<string>;
     onInputAttribute: EditableValue<string>;
+    onInputReadOnly: OnInputReadOnlyEnum;
     onInputAction?: ActionValue;
     onInputDelay: number;
     onInputFocus: boolean;
@@ -28,6 +31,7 @@ export interface BizzomateOnInputPreviewProps {
     styleObject: CSSProperties;
     onInputPlaceholder?: string;
     onInputAttribute: string;
+    onInputReadOnly: OnInputReadOnlyEnum;
     onInputAction: ActionPreview;
     onInputDelay: number;
     onInputFocus: boolean;
@@ -36,6 +40,7 @@ export interface BizzomateOnInputPreviewProps {
 export interface VisibilityMap {
     onInputPlaceholder: boolean;
     onInputAttribute: boolean;
+    onInputReadOnly: boolean;
     onInputAction: boolean;
     onInputDelay: boolean;
     onInputFocus: boolean;

@@ -28,6 +28,14 @@
             </propertyGroup>
             <propertyGroup caption="Editability">
                 <systemProperty key="Editability"/>
+                <property key="onInputReadOnly" type="enumeration" defaultValue="control">
+                    <caption>Read only style</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="control">Control</enumerationValue>
+                        <enumerationValue key="text">Text</enumerationValue>
+                    </enumerationValues>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">

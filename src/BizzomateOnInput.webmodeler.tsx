@@ -7,7 +7,13 @@ declare function require(name: string): string;
 
 export class preview extends Component<BizzomateOnInputPreviewProps> {
     render(): ReactNode {
-        return <TextInput value={this.props.onInputAttribute} />;
+        const value = this.props.onInputAttribute || "";
+        return <TextInput
+            value={value}
+            style={this.props.styleObject}
+            className={this.props.class}
+            placeholder={this.props.onInputPlaceholder}
+        />;
     }
 }
 
