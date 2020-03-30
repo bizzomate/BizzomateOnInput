@@ -1,39 +1,38 @@
 {
-  "name": "BizzomateOnInput",
-  "version": "1.1.0",
-  "description": "Input field wich triggers onChange while typing, by connecting to the onInput event.",
-  "license": "Apache 2",
+  "name": "bizzomateoninput",
+  "widgetName": "BizzomateOnInput",
+  "version": "2.0.0",
+  "description": "Input field which triggers onChange action while user is still editing by using an onInput event.",
+  "copyright": "2020 Bizzomate BV",
   "author": "Jelle Dekker",
-  "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "ansi-colors": "^4.1.1",
-    "del": "^2.2.2",
-    "fancy-log": "^1.3.3",
-    "gulp": "^4.0.2",
-    "gulp-if": "^3.0.0",
-    "gulp-intercept": "^0.1.0",
-    "gulp-json-transform": "^0.4.7",
-    "gulp-newer": "^1.4.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-zip": "^5.0.0",
-    "gulp-jsvalidate": "^4.0.0",
-    "widgetbuilder-gulp-helper": "https://github.com/JelteMX/widgetbuilder-gulp-helper/archive/1.0.2.tar.gz",
-    "yargs": "^14.0.0"
+  "config": {
+    "widgetPath": "./dist/MxTestProject/widgets",
+    "projectPath": "./dist/MxTestProject/",
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": "3000"
   },
-  "engines": {
-    "node": ">=5"
-  },
-  "generatorVersion": "2.2.5",
-  "paths": {
-    "testProjectFolder": "./test/",
-    "testProjectFileName": "Test.mpr"
-  },
+  "packagePath": "bizzomate",
   "scripts": {
-    "build": "node ./node_modules/gulp/bin/gulp build",
-    "version": "node ./node_modules/gulp/bin/gulp version",
-    "icon": "node ./node_modules/gulp/bin/gulp icon",
-    "folders": "node ./node_modules/gulp/bin/gulp folders",
-    "modeler": "node ./node_modules/gulp/bin/gulp modeler"
+    "start": "concurrently \"pluggable-widgets-tools start:server --open\" \"npm:dev\"",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "lint": "pluggable-widgets-tools lint",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:ts"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": "^8.7.0",
+    "@types/big.js": "^4.0.5",
+    "@types/classnames": "^2.2.4",
+    "@types/jest": "^24.0.0",
+    "@types/react": "^16.8.17",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-test-renderer": "^16.8.1"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2",
+    "classnames": "^2.2.6"
   }
 }
