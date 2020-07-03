@@ -13,6 +13,14 @@
                     <caption>Placeholder text</caption>
                     <description></description>
                 </property>
+                <property key="onInputListItemContent" type="widgets" dataSource="onInputListDataSource" required="false">
+                    <caption>Content</caption>
+                    <description>Widgets using data source</description>
+                </property>
+                <property key="onInputEmptyMessage" type="textTemplate" required="false">
+                    <caption>No results message</caption>
+                    <description></description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Data source">
                 <property key="onInputAttribute" type="attribute">
@@ -21,6 +29,10 @@
                     <attributeTypes>
                         <attributeType name="String"/>
                     </attributeTypes>
+                </property>
+                <property key="onInputListDataSource" type="datasource" isList="true" required="false">
+                    <caption>Listview source for search results</caption>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Label">

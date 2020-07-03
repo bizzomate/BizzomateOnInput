@@ -14,9 +14,20 @@ export interface InputProps {
     hasError?: boolean;
 }
 
+interface InputState {
+    valueOnExecute?: string;
+}
+
 export class TextInput extends Component<InputProps> {
     private readonly onChangeHandle = this.onChange.bind(this);
     private readonly onFocusHandle = this.onFocus.bind(this);
+    readonly state: InputState = { valueOnExecute: undefined };
+    componentDidUpdate(prevProps: InputProps): void {
+        if (this.props.value !== prevProps.value) {
+            this.setState({ valueOnExecute: undefined });
+        }
+    }
+
     render(): ReactNode {
         const className = classNames("form-control", this.props.className);
         //const describedBy = `${this.props.id}-label` + (this.props.hasError ? ` ${this.props.id}-error` : "");
@@ -39,19 +50,21 @@ export class TextInput extends Component<InputProps> {
                 onChange={this.onChangeHandle}
                 disabled={this.props.disabled == "control"}
                 aria-invalid={this.props.hasError}
-                //aria-describedby={describedBy}
+            //aria-describedby={describedBy}
             />;
         }
 
     }
     private onChange(event: ChangeEvent<HTMLInputElement>): void {
-        if (this.props.onUpdate) {
+        if (this.props.onUpdate && event.target.value !== this.state.valueOnExecute) {
             this.props.onUpdate(event.target.value);
         }
+        this.setState({ valueOnExecute: event.target.value });
     }
     private onFocus(event: FocusEvent<HTMLInputElement>): void {
-        if (this.props.onFocus) {
+        if (this.props.onFocus && event.target.value !== this.state.valueOnExecute) {
             this.props.onFocus(event.target.value);
         }
+        this.setState({ valueOnExecute: event.target.value });
     }
 }

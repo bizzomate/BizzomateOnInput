@@ -1,6 +1,53 @@
 /*
 Place your custom CSS here
 */
-.widget-hello-world {
+.bizzomateOnInput-loadingContainer .dot-flashing {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #666666;
+    color: #666666;
+    animation: dot-flashing 0.6s infinite linear alternate;
+    animation-delay: 0.3s;
+}
 
+.bizzomateOnInput-loadingContainer .dot-flashing::before,
+.bizzomateOnInput-loadingContainer .dot-flashing::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.bizzomateOnInput-loadingContainer .dot-flashing::before {
+    left: -9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #666666;
+    color: #666666;
+    animation: dot-flashing 0.6s infinite alternate;
+    animation-delay: 0s;
+}
+
+.bizzomateOnInput-loadingContainer .dot-flashing::after {
+    left: 9px;
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: #666666;
+    color: #666666;
+    animation: dot-flashing 0.6s infinite alternate;
+    animation-delay: 0.6s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #666666;
+    }
+    50%,
+    100% {
+        background-color: #cccccc;
+    }
 }
