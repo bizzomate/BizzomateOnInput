@@ -16,7 +16,7 @@
             </propertyGroup>
             <propertyGroup caption="Data source">
                 <property key="onInputAttribute" type="attribute">
-                    <caption>Attribute (path)</caption>
+                    <caption>Search param attribute</caption>
                     <description></description>
                     <attributeTypes>
                         <attributeType name="String"/>
@@ -36,6 +36,9 @@
                         <enumerationValue key="text">Text</enumerationValue>
                     </enumerationValues>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"/>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">

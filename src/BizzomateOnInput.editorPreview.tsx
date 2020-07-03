@@ -10,10 +10,25 @@ export class preview extends Component<BizzomateOnInputPreviewProps> {
         const value = this.props.onInputAttribute || "";
         return <TextInput
             value={value}
-            style={this.props.styleObject}
+            style= {this.parseStyle(this.props.style)}
             className={this.props.class}
             placeholder={this.props.onInputPlaceholder}
         />;
+    }
+
+    private parseStyle(style = ""): { [key: string]: string } {
+        try {
+            return style.split(";").reduce<{ [key: string]: string }>((styleObject, line) => {
+                const pair = line.split(":");
+                if (pair.length === 2) {
+                    const name = pair[0].trim().replace(/(-.)/g, match => match[1].toUpperCase());
+                    styleObject[name] = pair[1].trim();
+                }
+            return styleObject;
+            }, {});
+        } catch (_) {
+            return {};
+        }
     }
 }
 

@@ -11,8 +11,14 @@ class BizzomateOnInput extends Component<BizzomateOnInputContainerProps> {
     private readonly onUpdateHandle = this.onUpdate.bind(this);
     private readonly callActionHandle = this.callAction.bind(this);
     private callActionTimeOut!: number;
+    private waitingForExecution!: boolean;
     componentWillUnmount() {
         clearTimeout(this.callActionTimeOut);
+    }
+    componentDidUpdate() {
+        if (this.waitingForExecution && !this.props.onInputAction?.isExecuting) {
+            this.callActionHandle();
+        }
     }
     render(): ReactNode {
         const value = this.props.onInputAttribute.value || "";
@@ -41,8 +47,13 @@ class BizzomateOnInput extends Component<BizzomateOnInputContainerProps> {
         this.callActionTimeOut = setTimeout(this.callActionHandle, this.props.onInputDelay);
     }
     private callAction(): void {
-        if (!this.props.onInputAttribute.readOnly && this.props.onInputAction?.canExecute && !this.props.onInputAction.isExecuting) {
-            this.props.onInputAction.execute();
+        if (!this.props.onInputAttribute.readOnly && this.props.onInputAction?.canExecute) {
+            if (!this.props.onInputAction.isExecuting){
+                this.waitingForExecution = false;
+                this.props.onInputAction.execute();
+            } else {
+                this.waitingForExecution = true;
+            }
         }
     }
 }

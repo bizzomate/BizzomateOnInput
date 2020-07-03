@@ -1,7 +1,7 @@
 {
   "name": "bizzomateoninput",
   "widgetName": "BizzomateOnInput",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Input field which triggers onChange action while user is still editing by using an onInput event.",
   "copyright": "2020 Bizzomate BV",
   "author": "Jelle Dekker",
@@ -23,16 +23,15 @@
   },
   "license": "Apache-2.0",
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.7.0",
+    "@mendix/pluggable-widgets-tools": "^8.9.2",
     "@types/big.js": "^4.0.5",
     "@types/classnames": "^2.2.4",
     "@types/jest": "^24.0.0",
-    "@types/react": "^16.8.17",
-    "@types/react-dom": "^16.8.4",
-    "@types/react-test-renderer": "^16.8.1"
+    "@types/react": "~16.9.0",
+    "@types/react-dom": "~16.9.0",
+    "@types/react-test-renderer": "~16.9.0"
   },
   "dependencies": {
-    "big.js": "^5.2.2",
     "classnames": "^2.2.6"
   }
 }

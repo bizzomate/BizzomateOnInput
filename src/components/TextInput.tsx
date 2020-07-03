@@ -39,7 +39,7 @@ export class TextInput extends Component<InputProps> {
                 onChange={this.onChangeHandle}
                 disabled={this.props.disabled == "control"}
                 aria-invalid={this.props.hasError}
-            //aria-describedby={describedBy}
+                //aria-describedby={describedBy}
             />;
         }
 
